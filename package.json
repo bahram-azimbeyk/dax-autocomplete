@@ -1,15 +1,21 @@
 {
   "name": "dax-autocomplete",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "DAX formula suggestion",
+  "main": "dist/DAXAutocomplete.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test",
+    "type": "tsc",
+    "build:publish": "webpack --mode production --config ./webpack/webpack.config.js && tsc && npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahram-azimbeyk/dax-autocomplete.git"
   },
+  "keywords": [
+    "dax-suggestion"
+  ],
   "author": "Bahram Azimbeyk",
   "license": "ISC",
   "bugs": {
@@ -17,6 +23,10 @@
   },
   "homepage": "https://github.com/bahram-azimbeyk/dax-autocomplete#readme",
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "ts-loader": "^9.4.4",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }

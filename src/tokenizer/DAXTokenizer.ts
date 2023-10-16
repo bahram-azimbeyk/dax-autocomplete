@@ -1,13 +1,18 @@
 export class DAXTokenizer {
     private formula: string;
     private currentIndex: number;
+    private endIndex: number;
 
-    constructor(formula: string) {
+    constructor(formula: string, endIndex?: number) {
         this.formula = formula;
         this.currentIndex = 0;
+        this.endIndex = endIndex ?? formula.length;
     }
 
     nextToken(): string | null {
+        if (this.currentIndex >= this.endIndex) {
+            return null;
+        }
         // Skip whitespace
         while (this.currentIndex < this.formula.length && this.isWhitespace(this.formula[this.currentIndex])) {
             this.currentIndex++;

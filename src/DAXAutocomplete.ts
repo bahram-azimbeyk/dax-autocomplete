@@ -19,7 +19,7 @@ export class DAXAutocomplete {
     }
 
     autocomplete(daxFormula: string, atIndex?: number): SuggestionModel[] {
-        const tokenizer = new DAXTokenizer(daxFormula);
+        const tokenizer = new DAXTokenizer(daxFormula, atIndex);
         const tokens: string[] = [];
         let token: string | null;
         while (token = tokenizer.nextToken()) {
