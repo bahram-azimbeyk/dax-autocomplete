@@ -1,0 +1,22 @@
+{
+  "name": "dax-autocomplete",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahram-azimbeyk/dax-autocomplete.git"
+  },
+  "author": "Bahram Azimbeyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahram-azimbeyk/dax-autocomplete/issues"
+  },
+  "homepage": "https://github.com/bahram-azimbeyk/dax-autocomplete#readme",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
