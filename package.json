@@ -1,7 +1,7 @@
 {
   "name": "dax-autocomplete",
   "version": "1.0.1",
-  "description": "DAX formula suggestion",
+  "description": "DAX formula autocomplete suggestion",
   "main": "dist/DAXAutocomplete.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -14,7 +14,10 @@
     "url": "git+https://github.com/bahram-azimbeyk/dax-autocomplete.git"
   },
   "keywords": [
-    "dax-suggestion"
+    "dax-suggestion",
+    "DAX",
+    "autocomplete",
+    "dax-autocomplete"
   ],
   "author": "Bahram Azimbeyk",
   "license": "ISC",
