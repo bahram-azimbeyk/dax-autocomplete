@@ -1,6 +1,6 @@
 {
   "name": "dax-autocomplete",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DAX formula autocomplete suggestion",
   "main": "dist/DAXAutocomplete.js",
   "types": "types/index.d.ts",
