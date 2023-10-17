@@ -1,6 +1,6 @@
 
 import { DAXKeywords } from "./keywords/DAXKeywords";
-import { SuggestionModel } from "./models/suggestion.models";
+import { SuggestionModel } from "./models/models";
 import { DAXTokenizer } from "./tokenizer/DAXTokenizer";
 
 

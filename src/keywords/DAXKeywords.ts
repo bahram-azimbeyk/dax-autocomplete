@@ -1,4 +1,4 @@
-import { SuggestionModel } from "../models/suggestion.models";
+import { SuggestionModel } from "../models/models";
 
 export const DAXKeywords: SuggestionModel[] = [
     { name: "SUM", optionType: "keyword" },
