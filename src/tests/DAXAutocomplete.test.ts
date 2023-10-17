@@ -15,14 +15,14 @@ describe('DAXAutocomplete', () => {
     });
 
     test('should provide table suggestions when tables are set', () => {
-        autocomplete.setTables([{ name: 'Sales', optionType: 'table' }]);
+        autocomplete.setTables([{ name: 'Sales', id: 'test' }]);
         const suggestions = autocomplete.autocomplete('Sal');
         const tableNames = suggestions.filter(s => s.optionType === 'table').map(s => s.name);
         expect(tableNames).toContain('Sales');
     });
 
     test('should provide column suggestions when columns are set', () => {
-        autocomplete.setColumns([{ name: 'ProductName', optionType: 'column' }]);
+        autocomplete.setColumns([{ name: 'ProductName', id: 'test' }]);
         const suggestions = autocomplete.autocomplete('[Product');
         const columnNames = suggestions.map(s => s.name);
         expect(columnNames).toContain("ProductName");
@@ -34,7 +34,7 @@ describe('DAXAutocomplete', () => {
     });
 
     test('should provide suggestions based on cursor position', () => {
-        autocomplete.setTables([{ name: 'Sales', optionType: 'table' }, { name: 'Products', optionType: 'table' }]);
+        autocomplete.setTables([{ name: 'Sales', id: 'test' }, { name: 'Products', id: 'test2' }]);
         const suggestions = autocomplete.autocomplete('Sales + Prod', 13); // Cursor after "Prod"
         const tableNames = suggestions.filter(s => s.optionType === 'table').map(s => s.name);
         expect(tableNames).toContain('Products');
