@@ -1,9 +1,9 @@
 {
   "name": "dax-autocomplete",
-  "version": "1.2.0",
+  "version": "1.2.5",
   "description": "A TypeScript library for providing autocomplete suggestions for DAX (Data Analysis Expressions) formulas.",
-  "main": "dist/index.min.js",
-  "types": "types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "type": "tsc",
