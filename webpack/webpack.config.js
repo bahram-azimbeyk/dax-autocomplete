@@ -26,7 +26,7 @@ module.exports = {
   devtool: false,
   entry: './src/DAXAutocomplete.ts',
   output: {
-    filename: 'DAXAutocomplete.js',
+    filename: 'index.min.js',
     path: path.resolve('./dist'),
     library: "DAXAutocomplete",
     libraryTarget: 'umd',
