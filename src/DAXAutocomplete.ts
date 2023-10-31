@@ -60,6 +60,46 @@ export class DAXAutocomplete {
     this.columns = this.columnsMapToSuggestionModel(columnOptions);
   }
 
+  insertSuggestion(daxFormula: string, selectedSuggestion: SuggestionModel, atIndex?: number): string {
+    // Extract prefix and suffix from the suggestion model or default to empty string
+    const prefix = selectedSuggestion.prefix || '';
+    const suffix = selectedSuggestion.suffix || '';
+
+    // If atIndex is not provided, insert at the end of the formula
+    if (atIndex === undefined) {
+      return daxFormula + prefix + selectedSuggestion.name + suffix;
+    }
+
+    // Find the start of the partial word to be replaced
+    let startIdx = atIndex;
+    while (startIdx > 0 && /\w/.test(daxFormula[startIdx - 1])) {
+      startIdx--;
+    }
+
+    // Find the end of the partial word to be replaced
+    let endIdx = atIndex;
+    while (endIdx < daxFormula.length && /\w/.test(daxFormula[endIdx])) {
+      endIdx++;
+    }
+
+    // Check if the prefix and suffix already exist in the formula
+    if (daxFormula[startIdx - 1] === prefix) {
+      startIdx--;
+    }
+    if (daxFormula[endIdx] === suffix) {
+      endIdx++;
+    }
+
+    // Construct the new formula by replacing the partial word with the suggestion
+    const newDaxFormula = daxFormula.substring(0, startIdx) +
+      prefix +
+      selectedSuggestion.name +
+      suffix +
+      daxFormula.substring(endIdx);
+
+    return newDaxFormula;
+  }
+
   private tablesMapToSuggestionModel(tables: TableModels[]): SuggestionModel[] {
     return tables.map(table => {
       return {
