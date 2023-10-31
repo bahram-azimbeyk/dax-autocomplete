@@ -42,7 +42,10 @@ export class DAXAutocomplete {
 
     // If the last token is a column name prefix
     if (lastToken.startsWith('[')) {
-      const partialColumnName = lastToken.slice(1);
+      let partialColumnName = lastToken.slice(1);
+      if (partialColumnName.endsWith(']')) {
+        partialColumnName = partialColumnName.slice(0, -1);
+      }
       return this.columns.filter(column => column.name.toLowerCase().startsWith(partialColumnName.toLowerCase()));
     }
 

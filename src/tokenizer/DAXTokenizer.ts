@@ -61,7 +61,8 @@ export class DAXTokenizer {
 
     private readFunctionOrTableName(): string {
         let start = this.currentIndex;
-        while (this.currentIndex < this.formula.length && /[a-zA-Z0-9_]/.test(this.formula[this.currentIndex])) {
+        while (this.currentIndex < this.formula.length && (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
+            (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
             this.currentIndex++;
         }
         return this.formula.substring(start, this.currentIndex);
@@ -70,7 +71,9 @@ export class DAXTokenizer {
     private readColumnName(): string {
         let start = this.currentIndex;
         while (this.currentIndex < this.formula.length &&
-            (/[a-zA-Z0-9_]/.test(this.formula[this.currentIndex]) || this.formula[this.currentIndex] === '[')) {
+            (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
+                (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' ') ||
+                this.formula[this.currentIndex] === '[')) {
             this.currentIndex++;
         }
         // If the current character is a closing bracket, skip it
