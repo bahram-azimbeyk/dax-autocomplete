@@ -79,7 +79,7 @@ export class DAXAutocomplete {
         columnDataType: column.columnDataType,
         columnDataModuleType: column.columnDataModuleType,
         optionType: 'column',
-        prefix: column.columnParentName ? "'" + column.columnParentName + "'[" : '[',
+        prefix: '[',
         suffix: ']',
       } as SuggestionModel;
     });
