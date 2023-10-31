@@ -36,6 +36,16 @@ autocomplete.setColumns([{
 // Get suggestions
 const suggestions = autocomplete.autocomplete('SUM(');
 console.log(suggestions); // Outputs an array of suggestions
+
+// Insert a suggestion into a DAX formula
+const newFormula = autocomplete.insertSuggestion("SUM('Table1[Col", {
+    name: 'Column1',
+    columnParentName: 'Table1',
+    optionType: 'column',
+    prefix: '[',
+    suffix: ']',
+}, 14);
+console.log(newFormula); // Outputs "SUM('Table1[Column1]"
 ```
 
 ## Models
