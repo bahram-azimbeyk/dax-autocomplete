@@ -69,10 +69,14 @@ export class DAXTokenizer {
 
     private readColumnName(): string {
         let start = this.currentIndex;
-        while (this.currentIndex < this.formula.length && this.formula[this.currentIndex] !== ']') {
+        while (this.currentIndex < this.formula.length &&
+            (/[a-zA-Z0-9_]/.test(this.formula[this.currentIndex]) || this.formula[this.currentIndex] === '[')) {
             this.currentIndex++;
         }
-        this.currentIndex++;  // Skip closing ]
+        // If the current character is a closing bracket, skip it
+        if (this.formula[this.currentIndex] === ']') {
+            this.currentIndex++;
+        }
         return this.formula.substring(start, this.currentIndex);
     }
 
