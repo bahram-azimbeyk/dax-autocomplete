@@ -27,7 +27,7 @@ export class DAXAutocomplete {
     }
 
     if (tokens.length === 0 || !tokens[tokens.length - 1].trim()) {
-      return [...this.daxKeywords, ...this.tables];
+      return [];
     }
 
     const lastToken = tokens[tokens.length - 1];
@@ -35,15 +35,15 @@ export class DAXAutocomplete {
     // If the last token is a function or table name prefix
     if (this.isPartialName(lastToken)) {
       return [
-        ...this.daxKeywords.filter(func => func.name.startsWith(lastToken)),
-        ...this.tables.filter(table => table.name.startsWith(lastToken))
+        ...this.daxKeywords.filter(func => func.name.toLowerCase().startsWith(lastToken.toLowerCase())),
+        ...this.tables.filter(table => table.name.toLowerCase().startsWith(lastToken.toLowerCase()))
       ];
     }
 
     // If the last token is a column name prefix
     if (lastToken.startsWith('[')) {
       const partialColumnName = lastToken.slice(1);
-      return this.columns.filter(column => column.name.startsWith(partialColumnName));
+      return this.columns.filter(column => column.name.toLowerCase().startsWith(partialColumnName.toLowerCase()));
     }
 
     return [];
@@ -82,6 +82,7 @@ export class DAXAutocomplete {
   }
 
   private isPartialName(token: string): boolean {
-    return this.daxKeywords.some(func => func.name.startsWith(token)) || this.tables.some(table => table.name.startsWith(token));
+    return this.daxKeywords.some(func => func.name.toLowerCase().startsWith(token.toLowerCase())) ||
+      this.tables.some(table => table.name.toLowerCase().startsWith(token.toLowerCase()));
   }
 }
