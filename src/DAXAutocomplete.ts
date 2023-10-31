@@ -62,7 +62,9 @@ export class DAXAutocomplete {
       return {
         name: table.name,
         id: table.id,
-        optionType: 'table'
+        optionType: 'table',
+        prefix: "'",
+        suffix: "'",
       } as SuggestionModel;
     });
   }
@@ -76,7 +78,9 @@ export class DAXAutocomplete {
         columnType: column.columnType,
         columnDataType: column.columnDataType,
         columnDataModuleType: column.columnDataModuleType,
-        optionType: 'column'
+        optionType: 'column',
+        prefix: column.columnParentName ? "'" + column.columnParentName + "'[" : '[',
+        suffix: ']',
       } as SuggestionModel;
     });
   }

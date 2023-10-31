@@ -13,7 +13,8 @@ export interface ColumnModel extends TableModels {
 
 export interface SuggestionModel extends TableModels {
   optionType: 'column' | 'table' | 'keyword';
-
+  prefix?: string;
+  suffix?: string;
 }
 
 
