@@ -40,6 +40,14 @@ export class DAXAutocomplete {
       ];
     }
 
+    if (lastToken.startsWith("'")) {
+      let partialTableName = lastToken.slice(1);
+      if (partialTableName.endsWith("'")) {
+        partialTableName = partialTableName.slice(0, -1);
+      }
+      return this.tables.filter(table => table.name.toLowerCase().startsWith(partialTableName.toLowerCase()));
+    }
+
     // If the last token is a column name prefix
     if (lastToken.startsWith('[')) {
       let partialColumnName = lastToken.slice(1);

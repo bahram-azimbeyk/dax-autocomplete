@@ -29,6 +29,8 @@ export class DAXTokenizer {
             return this.readFunctionOrTableName();
         } else if (currentChar === '[') {
             return this.readColumnName();
+        } else if (currentChar === "'") {
+            return this.readTableName();
         } else if (this.isOperator(currentChar)) {
             this.currentIndex++;
             return currentChar;
@@ -70,15 +72,27 @@ export class DAXTokenizer {
 
     private readColumnName(): string {
         let start = this.currentIndex;
+        this.currentIndex++;  // Skip opening [
         while (this.currentIndex < this.formula.length &&
             (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
-                (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' ') ||
-                this.formula[this.currentIndex] === '[')) {
+                (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
             this.currentIndex++;
         }
-        // If the current character is a closing bracket, skip it
         if (this.formula[this.currentIndex] === ']') {
+            this.currentIndex++; // Skip closing ]
+        }
+        return this.formula.substring(start, this.currentIndex);
+    }
+
+    private readTableName(): string {
+        let start = this.currentIndex;
+        this.currentIndex++;  // Skip opening '
+        while (this.currentIndex < this.formula.length && (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
+            (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
             this.currentIndex++;
+        }
+        if (this.formula[this.currentIndex] === "'") {
+            this.currentIndex++;  // Skip closing '
         }
         return this.formula.substring(start, this.currentIndex);
     }
@@ -97,7 +111,9 @@ export class DAXTokenizer {
         while (this.currentIndex < this.formula.length && this.formula[this.currentIndex] !== '"') {
             this.currentIndex++;
         }
-        this.currentIndex++;  // Skip closing "
+        if (this.formula[this.currentIndex] === '"') {
+            this.currentIndex++;  // Skip closing "
+        }
         return this.formula.substring(start, this.currentIndex);
     }
 }
