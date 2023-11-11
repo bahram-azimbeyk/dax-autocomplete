@@ -63,7 +63,7 @@ export class DAXTokenizer {
 
     private readFunctionOrTableName(): string {
         let start = this.currentIndex;
-        while (this.currentIndex < this.formula.length && (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
+        while (this.currentIndex < this.formula.length && (/[\u0600-\u06FFa-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
             (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
             this.currentIndex++;
         }
@@ -74,7 +74,7 @@ export class DAXTokenizer {
         let start = this.currentIndex;
         this.currentIndex++;  // Skip opening [
         while (this.currentIndex < this.formula.length &&
-            (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
+            (/[\u0600-\u06FFa-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
                 (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
             this.currentIndex++;
         }
@@ -87,7 +87,7 @@ export class DAXTokenizer {
     private readTableName(): string {
         let start = this.currentIndex;
         this.currentIndex++;  // Skip opening '
-        while (this.currentIndex < this.formula.length && (/[a-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
+        while (this.currentIndex < this.formula.length && (/[\u0600-\u06FFa-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
             (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
             this.currentIndex++;
         }

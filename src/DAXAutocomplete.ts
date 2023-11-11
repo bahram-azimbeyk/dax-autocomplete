@@ -80,13 +80,13 @@ export class DAXAutocomplete {
 
     // Find the start of the partial word to be replaced
     let startIdx = atIndex;
-    while (startIdx > 0 && /\w/.test(daxFormula[startIdx - 1])) {
+    while (startIdx > 0 && /[\u0600-\u06FFa-zA-Z0-9_ ]/.test(daxFormula[startIdx - 1])) {
       startIdx--;
     }
 
     // Find the end of the partial word to be replaced
     let endIdx = atIndex;
-    while (endIdx < daxFormula.length && /\w/.test(daxFormula[endIdx])) {
+    while (endIdx < daxFormula.length && /[\u0600-\u06FFa-zA-Z0-9_ ]/.test(daxFormula[endIdx])) {
       endIdx++;
     }
 
