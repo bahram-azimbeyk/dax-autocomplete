@@ -11,7 +11,7 @@ export interface ColumnModel extends TableModels {
   columnDataModuleType?: 'Quantity' | 'Quality';
 }
 
-export interface SuggestionModel extends TableModels {
+export interface SuggestionModel extends ColumnModel {
   optionType: 'column' | 'table' | 'keyword';
   prefix?: string;
   suffix?: string;
