@@ -72,10 +72,11 @@ export class DAXAutocomplete {
     // Extract prefix and suffix from the suggestion model or default to empty string
     const prefix = selectedSuggestion.prefix || '';
     const suffix = selectedSuggestion.suffix || '';
+    let suggestionName = prefix + selectedSuggestion.name + suffix;
 
     // If atIndex is not provided, insert at the end of the formula
     if (atIndex === undefined) {
-      return daxFormula + prefix + selectedSuggestion.name + suffix;
+      return daxFormula + suggestionName;
     }
 
     // Find the start of the partial word to be replaced
@@ -98,11 +99,16 @@ export class DAXAutocomplete {
       endIdx++;
     }
 
+    if (selectedSuggestion.optionType === 'column' && selectedSuggestion.columnParentName) {
+      if (daxFormula.substring(startIdx - selectedSuggestion.columnParentName.length - 1, startIdx - 1)
+        !== selectedSuggestion.columnParentName) {
+        suggestionName = `'${selectedSuggestion.columnParentName}'${suggestionName}`;
+      }
+    }
+
     // Construct the new formula by replacing the partial word with the suggestion
     const newDaxFormula = daxFormula.substring(0, startIdx) +
-      prefix +
-      selectedSuggestion.name +
-      suffix +
+      suggestionName +
       daxFormula.substring(endIdx);
 
     return newDaxFormula;
