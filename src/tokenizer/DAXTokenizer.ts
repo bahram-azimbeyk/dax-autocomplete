@@ -26,7 +26,7 @@ export class DAXTokenizer {
 
         // Handle different token types
         if (this.isLetter(currentChar)) {
-            return this.readFunctionOrTableName();
+            return this.readSuggestionName();
         } else if (currentChar === '[') {
             return this.readColumnName();
         } else if (currentChar === "'") {
@@ -34,8 +34,6 @@ export class DAXTokenizer {
         } else if (this.isOperator(currentChar)) {
             this.currentIndex++;
             return currentChar;
-        } else if (this.isDigit(currentChar)) {
-            return this.readNumber();
         } else if (currentChar === '"') {
             return this.readString();
         } else {
@@ -50,18 +48,14 @@ export class DAXTokenizer {
     }
 
     private isLetter(char: string): boolean {
-        return /[a-zA-Z]/.test(char);
-    }
-
-    private isDigit(char: string): boolean {
-        return /[0-9]/.test(char);
+        return /[\u0600-\u06FFa-zA-Z0-9_ ]/.test(char);
     }
 
     private isOperator(char: string): boolean {
         return /[+\-*/&]/.test(char);
     }
 
-    private readFunctionOrTableName(): string {
+    private readSuggestionName(): string {
         let start = this.currentIndex;
         while (this.currentIndex < this.formula.length && (/[\u0600-\u06FFa-zA-Z0-9_ ]/.test(this.formula[this.currentIndex]) ||
             (this.formula[this.currentIndex] === '-' && this.formula[this.currentIndex - 1] !== ' '))) {
@@ -93,14 +87,6 @@ export class DAXTokenizer {
         }
         if (this.formula[this.currentIndex] === "'") {
             this.currentIndex++;  // Skip closing '
-        }
-        return this.formula.substring(start, this.currentIndex);
-    }
-
-    private readNumber(): string {
-        let start = this.currentIndex;
-        while (this.currentIndex < this.formula.length && /[0-9.]/.test(this.formula[this.currentIndex])) {
-            this.currentIndex++;
         }
         return this.formula.substring(start, this.currentIndex);
     }

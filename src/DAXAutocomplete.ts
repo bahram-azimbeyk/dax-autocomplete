@@ -36,7 +36,8 @@ export class DAXAutocomplete {
     if (this.isPartialName(lastToken)) {
       return [
         ...this.daxKeywords.filter(func => func.name.toLowerCase().startsWith(lastToken.toLowerCase())),
-        ...this.tables.filter(table => table.name.toLowerCase().startsWith(lastToken.toLowerCase()))
+        ...this.tables.filter(table => table.name.toLowerCase().startsWith(lastToken.toLowerCase())),
+        ...this.columns.filter(column => column.name.toLowerCase().startsWith(lastToken.toLowerCase())),
       ];
     }
 
@@ -144,6 +145,7 @@ export class DAXAutocomplete {
 
   private isPartialName(token: string): boolean {
     return this.daxKeywords.some(func => func.name.toLowerCase().startsWith(token.toLowerCase())) ||
-      this.tables.some(table => table.name.toLowerCase().startsWith(token.toLowerCase()));
+      this.tables.some(table => table.name.toLowerCase().startsWith(token.toLowerCase())) ||
+      this.columns.some(column => column.name.toLowerCase().startsWith(token.toLowerCase()));
   }
 }
